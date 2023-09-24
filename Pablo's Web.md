@@ -24,6 +24,7 @@ After getting the first flag we get a link to
 Upon going to the roots of these pages we get small hints for the future like
 
 > Did you know? : Pablo has an alias -"pabulous"
+> 
 > Useful fact : light comes after dark
 
 after using the second hint we get the flag in the comments of
@@ -48,19 +49,19 @@ from this we get a string
 `4b4a57585132433250465458555444324a56594536324b424e464b575555544b4a56434545543259504a43584f544b454b553255344d5a514e453d3d3d3d3d3d`
 
 we run a 3 layer decryption in the following order
-1.hexadecimal to ascii
+1. hexadecimal to ascii
     ```
     4b4a57585132433250465458555444324a56594536324b424e464b575555544b4a56434545543259504a43584f544b454b553255344d5a514e453d3d3d3d3d3d
     Becomes
     KJWXQ2C2PFTXUTD2JVYE62KBNFKWUUTKJVCEET2YPJCXOTKEKU2U4MZQNE======
     ```
-1.base32 decryption
+1. base32 decryption
     ```
     KJWXQ2C2PFTXUTD2JVYE62KBNFKWUUTKJVCEET2YPJCXOTKEKU2U4MZQNE======
     Becomes
     RmxhZygzLzMpOiAiUjRjMDBOXzEwMDU5N30i
     ```
-1.base64 decryption
+1. base64 decryption
     ```
     RmxhZygzLzMpOiAiUjRjMDBOXzEwMDU5N30i
     Becomes
