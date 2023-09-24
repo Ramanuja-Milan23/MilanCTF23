@@ -42,7 +42,11 @@ Here we get an image download hyperlink that has an error.
 
 after inspecting the site we go to the root url of the image and download it from there
 
-Then we run steganography on the image using the password as "pabulous" with reference to the first hint
+Then we run steganography on the image (Pablo.jpg) using the password as "pabulous" with reference to the first hint
+```
+steghide extract -sf Pablo.jpg -p 'pabulous'
+```
+This gives us a text file which contains the below shown string.
 
 from this we get a string
 
