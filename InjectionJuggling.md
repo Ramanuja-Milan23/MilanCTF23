@@ -2,8 +2,8 @@
 
 After analysing the two php files we realised,
 
-1.home.php was susceptible to a union attack
-1.login.php used loose comparison (==) which were sometimes susceptible to type juggling
+1. home.php was susceptible to a union attack
+1. login.php used loose comparison (==) which were sometimes susceptible to type juggling
 
 ## Sql injection on home.php
 We put 
