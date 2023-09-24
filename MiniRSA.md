@@ -1,0 +1,89 @@
+# Mini RSA
+
+We know from the code that RSA was encrypted twice:
+
+    c = pow(m, e1, n1)
+    c = pow(c, e2, n2)
+
+Which is equivalent to (Since n1 = n2)
+
+    c = pow(m, e1*e2, n1)
+
+let e = e1*e2
+
+Then since e and n are in the same order of magnitude, the value of d may be small(i.e d \< 1/3 * n^1/4).
+We can use Weiner's attack to find d.
+
+Algorithm:
+
+```
+import math
+from fractions import Fraction
+import codecs
+
+def continued_fractions(r : Fraction):
+    a = r.numerator
+    b = r.denominator
+
+    lst = []
+
+    while b != 0:
+        q = a // b
+        r_k = a % b
+
+        lst.append(q)
+
+        a = b
+        b = r_k
+
+    lst[-1] -= 1
+    lst.append(1)
+    
+    return lst
+
+
+def convergents(lst):
+    conv = []
+
+    for i in range(0, len(lst)):
+        sum = Fraction(lst[i], 1)
+
+        for j in reversed(range(0, i)):
+            sum = Fraction(lst[j], 1) + 1 / sum
+        
+        conv.append(sum)
+    
+    return conv
+
+
+n = 554264859105764813308660999731057971935100899008191382001838196926947542874512190874402841957978974562758951331436856029517893995971179950228409634742368823490858553015862605452077729540463185207987338059905256552215054036643656077780363670065154151957507791559734841291875379738678210733333998195096643491711
+e1 = 37507589401
+e2 = 4268405784672563577566143285906824408738650526784746749170468318123056940297449811287105187623419766934370809781249030117023876215912795037797160740003478418767197450012472858547143622542113157392499087427939336504102036205305906052998841826136038160560099357503377453502865716581429205507834478651
+e = e1 * e2
+
+c = 476095527832639850885746472610838838730329968644711732035447727196908491488470529522557244094999041456106090992627921566643788324243965589687423192246153347413434931711555601651508827990894439878892457580813291557380744730628578093648505190474756166049901567346035257447320881393550486254422657842579391756277
+
+m_val = 1935298160333697986448203251977467939707051411272129153285232475770478288883492206985167538277011680896211834386924630767778126034349362385666559205735144516229894590308254609856600
+
+cf = continued_fractions(Fraction(e, n))
+conv = convergents(cf)
+
+print("Calculated Convergents")
+
+for i in conv:
+    k = i.numerator
+    d = i.denominator
+
+    try:
+        m = pow(c, d, n)
+        if m == m_val:
+            print(f'd = {d}, m = {m}')
+
+    except:
+        continue
+
+```
+
+Using the value of d we can decrypt the commented cipher at the end of main.py to get the flag.
+
+Flag: milanCTF{larg3_e_1s_al50_n0t_g00d_78346934}
